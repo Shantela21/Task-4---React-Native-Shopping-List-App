@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
@@ -9,6 +9,7 @@ import { useToast } from '../hooks/useToast';
 import { RootState } from '../store';
 import { addItem, clearError, deleteItem, toggleItemPurchased, updateItem } from '../store/shoppingListSlice';
 import { ShoppingItem } from '../types';
+import { Stack } from 'expo-router';
 
 export default function Index() {
   const dispatch = useDispatch();
@@ -48,8 +49,14 @@ export default function Index() {
   };
 
   return (
-    <View style={styles.container}>
+    <>
+      <Stack.Screen options={{ headerShown: false }} />
+      <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Shopping List</Text>
+      </View>
       
       <AddItemForm 
         onAddItem={handleAddItem} 
@@ -71,6 +78,7 @@ export default function Index() {
       
       <Toast />
     </View>
+    </>
   );
 }
 
@@ -78,5 +86,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+  },
+  header: {
+    backgroundColor: '#fff',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });
