@@ -15,7 +15,7 @@ export default function Index() {
   const { error } = useSelector((state: RootState) => state.shoppingList);
   const [editingItem, setEditingItem] = useState<ShoppingItem | null>(null);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const { showSuccessToast, showErrorToast } = useToast();
+  const { showSuccessToast } = useToast();
 
   const handleAddItem = (name: string, quantity: number) => {
     dispatch(addItem({ name, quantity }));
